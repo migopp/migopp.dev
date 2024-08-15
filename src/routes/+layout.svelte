@@ -36,6 +36,8 @@
 
 <style>
 	#layout-container {
+		display: flex;
+		flex-direction: column;
 		max-width: 900px;
 		margin: 0 auto;
 		font-family: 'Spectral', monospace;
@@ -54,6 +56,15 @@
 	* {
 		margin: 0;
 		padding: 0;
+	}
+
+	header,
+	main {
+		height: 100%;
+	}
+
+	main {
+		flex: 1;
 	}
 
 	header,

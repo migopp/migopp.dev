@@ -56,6 +56,7 @@
 	onDestroy(() => clearInterval(interval));
 </script>
 
+<!--TERMINAL-->
 <div id="terminal">
 	<span id="prompt">
 		<p id="host">anon@migopp.dev</p>
@@ -67,7 +68,7 @@
 		<br />
 		<p>
 			I'm a developer and student at UT Austin studying Computer Science and Mathematics. Right now,
-			I'm most interested in learning about systems programming.
+			I'm most interested in systems programming.
 		</p>
 		<br />
 		<p>I'm also into cats and bagels.</p>
