@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { onMount, onDestroy } from "svelte";
+	import { onMount, onDestroy } from 'svelte';
 
 	// loading animation
-	const cmd_text: string = "cat README.txt";
-	let typed_cmd_text: string = "_";
+	const cmd_text: string = 'cat README.txt';
+	let typed_cmd_text: string = '_';
 	let index: number = 0;
 	let readme_visible: boolean = false;
 	let prompt_visible: boolean = false;
 	function sleep(ms: number): Promise<void> {
-		return new Promise(resolve => setTimeout(resolve, ms));
+		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 	async function animation() {
 		// initial delay
@@ -17,23 +17,22 @@
 		// typing text
 		while (index < cmd_text.length) {
 			// wait longer for periods before appear
-			if(cmd_text[index] === ".") {
-				await sleep(300)
+			if (cmd_text[index] === '.') {
+				await sleep(300);
 			}
 
 			typed_cmd_text = typed_cmd_text.slice(0, -1);
 			typed_cmd_text += cmd_text[index];
-			typed_cmd_text += "_";
-
+			typed_cmd_text += '_';
 
 			// wait longer for spaces and periods after appear
 			let next: string = cmd_text[index];
-			if (next === " " || next === ".") {
+			if (next === ' ' || next === '.') {
 				await sleep(300);
 			} else {
 				await sleep(Math.random() * (140 - 100) + 100);
 			}
-			
+
 			index++;
 		}
 		typed_cmd_text = typed_cmd_text.slice(0, -1);
@@ -52,7 +51,7 @@
 	let cursor_is_visible: boolean = true;
 	const toggle_cursor = () => {
 		cursor_is_visible = !cursor_is_visible;
-	}
+	};
 	const interval = setInterval(toggle_cursor, 500);
 	onDestroy(() => clearInterval(interval));
 </script>
@@ -63,17 +62,20 @@
 		<p id="buck">$</p>
 		<p>{typed_cmd_text}</p>
 	</span>
-	<div id="readme" class={readme_visible ? "visible" : "invisible"}>
+	<div id="readme" class={readme_visible ? 'visible' : 'invisible'}>
 		<p>Howdy, and welcome to my corner of the internet.</p>
 		<br />
-		<p>I'm a developer and student at UT Austin studying Computer Science and Mathematics. Right now, I'm most interested in learning about systems programming.</p>
+		<p>
+			I'm a developer and student at UT Austin studying Computer Science and Mathematics. Right now,
+			I'm most interested in learning about systems programming.
+		</p>
 		<br />
 		<p>I'm also into cats and bagels.</p>
 	</div>
-	<span id="prompt" class={prompt_visible ? "visible" : "invisible"}>
+	<span id="prompt" class={prompt_visible ? 'visible' : 'invisible'}>
 		<p id="host">anon@migopp.dev</p>
 		<p id="buck">$</p>
-		<p>{cursor_is_visible ? "_" : " "}</p>
+		<p>{cursor_is_visible ? '_' : ' '}</p>
 	</span>
 </div>
 
@@ -119,7 +121,7 @@
 	.visible {
 		opacity: 1;
 	}
-	
+
 	.invisible {
 		opacity: 0;
 	}
