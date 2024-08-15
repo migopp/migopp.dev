@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	let current_year: number = new Date().getFullYear();
 </script>
 
@@ -14,9 +13,9 @@
 	<header>
 		<nav>
 			<ul>
-				<li><a href="{base}/" id="migopp">migopp🔥</a></li>
-				<li><a href="{base}/thoughts">thoughts</a></li>
-				<li><a href="{base}/projects">projects</a></li>
+				<li><a href="/" id="migopp">migopp🔥</a></li>
+				<li><a href="/thoughts">thoughts</a></li>
+				<li><a href="/projects">projects</a></li>
 			</ul>
 		</nav>
 	</header>
