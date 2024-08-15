@@ -42,7 +42,7 @@
 		readme_visible = true;
 
 		// prompt
-		await sleep(500);
+		await sleep(200);
 		prompt_visible = true;
 	}
 	onMount(() => animation());
