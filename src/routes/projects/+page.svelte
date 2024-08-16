@@ -2,6 +2,10 @@
 	import projects from '$lib/projects.json';
 </script>
 
+<svelte:head>
+	<title>projects</title>
+</svelte:head>
+
 <h1>projects</h1>
 <p>A few of my projects.</p>
 {#each projects as project}

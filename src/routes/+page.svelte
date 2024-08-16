@@ -56,6 +56,10 @@
 	onDestroy(() => clearInterval(interval));
 </script>
 
+<svelte:head>
+	<title>migopp.dev</title>
+</svelte:head>
+
 <!--TERMINAL-->
 <div id="terminal">
 	<span id="prompt">
