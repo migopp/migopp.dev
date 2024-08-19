@@ -8,20 +8,26 @@
 
 <h1>projects</h1>
 <p>A few of my projects.</p>
-{#each projects as project}
-	<div id="project">
-		<span id="title-line">
-			<h2 id="title">{project.name}</h2>
-			{#if project.link}
-				<a href={project.link} target="_blank" rel="noopener noreferrer">🔗</a>
-			{/if}
-		</span>
-		<p>{project.description}</p>
-		<p id="technologies">Technologies: {project.technologies}</p>
-	</div>
-{/each}
+<div id="projects-div">
+	{#each projects as project}
+		<div id="project">
+			<span id="title-line">
+				<h2 id="title">{project.name}</h2>
+				{#if project.link}
+					<a href={project.link} target="_blank" rel="noopener noreferrer">🔗</a>
+				{/if}
+			</span>
+			<p>{project.description}</p>
+			<p id="technologies">Technologies: {project.technologies}</p>
+		</div>
+	{/each}
+</div>
 
 <style>
+	#projects-div {
+		margin-top: 1rem;
+	}
+
 	#project {
 		margin-bottom: 0.5rem;
 	}

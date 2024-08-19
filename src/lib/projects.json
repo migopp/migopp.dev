@@ -1,10 +1,10 @@
 [
 	{
 		"id": 9,
-		"name": "fssh",
-		"description": "A fast SSH tool for UT Austin students to automate the process of connecting to the lowest-load lab machine.",
-		"technologies": "Python",
-		"link": "https://github.com/migopp/fssh"
+		"name": "fetch-host",
+		"description": "A tool for UTCS students to fetch command to SSH into the lowest-load lab machine.",
+		"technologies": "Go",
+		"link": "https://github.com/migopp/fetch-host"
 	},
 	{
 		"id": 8,
