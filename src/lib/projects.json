@@ -1,8 +1,15 @@
 [
 	{
+		"id": 10,
+		"name": "snack-api",
+		"description": "Built a RESTful API for finding and liking others' snack preferences.",
+		"technologies": "Go",
+		"link": "https://github.com/migopp/snack-api"
+	},
+	{
 		"id": 9,
 		"name": "fetch-host",
-		"description": "A tool for UTCS students to fetch command to SSH into the lowest-load lab machine.",
+		"description": "Built a tool for UTCS students to fetch command to SSH into the lowest-load lab machine.",
 		"technologies": "Go",
 		"link": "https://github.com/migopp/fetch-host"
 	},
