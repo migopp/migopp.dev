@@ -3,7 +3,7 @@
 		"id": 10,
 		"name": "snack-api",
 		"description": "Built a RESTful API for finding and liking others' snack preferences.",
-		"technologies": "Go",
+		"technologies": "Go, PostgreSQL, Docker",
 		"link": "https://github.com/migopp/snack-api"
 	},
 	{
