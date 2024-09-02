@@ -14,7 +14,6 @@
 		<nav>
 			<ul>
 				<li><a href="/" id="migopp">migopp🔥</a></li>
-				<li><a href="/thoughts">thoughts</a></li>
 				<li><a href="/projects">projects</a></li>
 			</ul>
 		</nav>
