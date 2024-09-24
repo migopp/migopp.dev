@@ -1,5 +1,12 @@
 [
 	{
+		"id": 11,
+		"name": "Preemptive Multithreading",
+		"description": "Designed kernel-level preemptive multithreading support, allowing APIT interrupts to forcibly yield threads.",
+		"technologies": "C++, x86-32 Assembly",
+		"link": ""
+	},
+	{
 		"id": 10,
 		"name": "snack-api",
 		"description": "Built a RESTful API for finding and liking others' snack preferences.",
@@ -31,7 +38,7 @@
 		"id": 6,
 		"name": "C-Routines",
 		"description": "Implemented go-style stackful coroutines.",
-		"technologies": "C",
+		"technologies": "C, x86 Assembly",
 		"link": ""
 	},
 	{
