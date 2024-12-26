@@ -63,7 +63,10 @@
 <!--TERMINAL-->
 <div id="terminal">
 	<span id="prompt">
-		<p id="host">anon@migopp.dev</p>
+		<p id="user">anon</p>
+		<p id="at">@</p>
+		<p id="host">migopp.dev</p>
+		<p id="cwd">~</p>
 		<p id="buck">$</p>
 		<p>{typed_cmd_text}</p>
 	</span>
@@ -72,13 +75,16 @@
 		<br />
 		<p>
 			I'm a developer and student at UT Austin studying Computer Science and Mathematics. Right now,
-			I'm most interested in systems programming.
+			I'm most interested in systems and web programming.
 		</p>
 		<br />
 		<p>I'm also into cats and bagels.</p>
 	</div>
 	<span id="prompt" class={prompt_visible ? 'visible' : 'invisible'}>
-		<p id="host">anon@migopp.dev</p>
+		<p id="user">anon</p>
+		<p id="at">@</p>
+		<p id="host">migopp.dev</p>
+		<p id="cwd">~</p>
 		<p id="buck">$</p>
 		<p>{cursor_is_visible ? '_' : ' '}</p>
 	</span>
@@ -91,6 +97,7 @@
 		--t-yellow: #d79921;
 		--t-blue: #458588;
 		--t-green: #8ec07c;
+		--t-lgreen: #c0e2b3;
 	}
 
 	#terminal {
@@ -98,7 +105,7 @@
 		width: 95%;
 		min-height: 14rem;
 		border-radius: 10px;
-		padding: 0 0.5rem 1rem 0.75rem;
+		padding: 0 0.5rem 1rem 0.5rem;
 		background-color: var(--t-grey);
 		font-family: 'Fira Code', monospace;
 		color: white;
@@ -111,8 +118,17 @@
 		padding: 1rem 0 0.5rem 1rem;
 	}
 
+	#terminal #user {
+		color: var(--t-lgreen);
+	}
+
 	#terminal #host {
 		color: var(--t-green);
+	}
+
+	#terminal #cwd {
+		color: var(--t-yellow);
+		padding: 0 0.5rem;
 	}
 
 	#terminal #buck {

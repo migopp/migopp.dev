@@ -10,41 +10,50 @@
 </svelte:head>
 
 <div id="layout-container">
-	<header>
-		<nav>
+	<div id="layout">
+		<header>
+			<a href="/" id="migopp">migopp 🌱</a>
+
+			<nav>
+				<ul>
+					<li><a href="/things">things</a></li>
+					<li>|</li>
+					<li><a href="/thoughts">thoughts</a></li>
+					<li>|</li>
+					<li>track record</li>
+				</ul>
+			</nav>
+		</header>
+
+		<main>
+			<slot></slot>
+		</main>
+
+		<footer>
 			<ul>
-				<li><a href="/" id="migopp">migopp🔥</a></li>
-				<li><a href="/projects">projects</a></li>
+				<li class="jp">僕の心から</li>
+				<li style="padding-top: 0.25rem;">&copy; {current_year} Michael Goppert</li>
 			</ul>
-		</nav>
-	</header>
-
-	<main>
-		<slot></slot>
-	</main>
-
-	<footer>
-		<ul>
-			<li class="jp">僕の心から</li>
-			<li><a href="https://github.com/migopp">github</a></li>
-			<li><a href="https://linkedin.com/in/migopp">linkedin</a></li>
-		</ul>
-		<p>&copy; {current_year} michael goppert</p>
-	</footer>
+		</footer>
+	</div>
 </div>
 
 <style>
 	#layout-container {
-		display: flex;
-		flex-direction: column;
-		max-width: 900px;
+		max-width: 800px;
 		margin: 0 auto;
 		font-family: 'Spectral', monospace;
 	}
 
+	#layout {
+		display: flex;
+		flex-direction: column;
+		margin: 0 0.5rem;
+	}
+
 	#migopp {
-		font-size: 1.5rem;
-		font-weight: 600;
+		font-size: 1.75rem;
+		font-weight: 700;
 	}
 
 	.jp {
@@ -75,7 +84,6 @@
 	footer ul {
 		list-style: none;
 		display: flex;
-		flex-direction: row;
 		align-items: center;
 	}
 	header li,
@@ -84,8 +92,8 @@
 		margin-right: 1rem;
 	}
 
-	header li a,
-	footer li a {
+	header a,
+	footer a {
 		text-decoration: none;
 		color: inherit;
 	}
