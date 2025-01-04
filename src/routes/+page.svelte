@@ -74,8 +74,8 @@
 		<p>Howdy, and welcome to my corner of the internet.</p>
 		<br />
 		<p>
-			I'm a developer and student at UT Austin studying Computer Science and Mathematics. Right now,
-			I'm most interested in systems and web programming.
+			I'm a developer and student at UT Austin studying Computer Science and Mathematics. I'm most
+			interested in systems programming.
 		</p>
 		<br />
 		<p>I'm also into cats and bagels.</p>
