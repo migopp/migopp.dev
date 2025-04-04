@@ -24,13 +24,16 @@ jobs:
       - name: Build site
         run: make html
 
+      - name: Copy static dir
+        run: cp -r static/ target/
+
+      - name: List target dir
+        run: ls -R target
+
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: target
-
-      - name: List target dir
-        run: ls -R target
 
   deploy:
     needs: build
@@ -42,9 +45,6 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - name: Copy static dir
-        run: cp -r static/ target/
-
       - name: Deploy to Pages
         id: deployment
         uses: actions/deploy-pages@v4
