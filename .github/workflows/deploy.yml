@@ -27,6 +27,9 @@ jobs:
       - name: Copy static dir
         run: cp -r static/ target/
 
+      - name: CNAME hack
+        run: echo "www.migopp.dev" > target/CNAME
+
       - name: List target dir
         run: ls -R target
 
