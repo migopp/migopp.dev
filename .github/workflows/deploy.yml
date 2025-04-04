@@ -42,6 +42,9 @@ jobs:
       pages: write
       id-token: write
     steps:
+      - name: Copy static dir
+        run: cp -r static/ target/
+
       - name: Deploy to Pages
         id: deployment
         uses: actions/deploy-pages@v4
