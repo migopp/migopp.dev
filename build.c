@@ -51,7 +51,6 @@ int build_target_structure(const char *f) {
     log_err("Failed to construct filepath for `%s`", fp);
     return -1;
   }
-  printf("FP: %s\n", fp);
   struct stat sb;
   if (stat(fp, &sb) == 0 && S_ISDIR(sb.st_mode)) {
     log("`%s` already exists... Continuing.", fp);
