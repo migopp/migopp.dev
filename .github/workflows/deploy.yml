@@ -25,7 +25,7 @@ jobs:
         run: make html
 
       - name: Copy static dir
-        run: cp -r static/ target/
+        run: cp -r static/* target/
 
       - name: CNAME hack
         run: echo "www.migopp.dev" > target/CNAME
