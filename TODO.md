@@ -8,7 +8,7 @@
 
 - [x] Favicon
 
-- [ ] Figure out how to deploy
+- [x] Figure out how to deploy
 
   - Self-host? Tunnels?
   - Routing.
