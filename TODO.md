@@ -14,3 +14,7 @@
   - Routing.
 
 - [ ] Smart re-building (only when .md touched after .html)
+
+- [ ] Template for blog posts
+
+  - Also requires updates to build script
