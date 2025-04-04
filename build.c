@@ -37,23 +37,37 @@
     }                                                                          \
   })
 
-// Sets up directory structure for deployment.
+// Builds a given directory structure in `target/`
 //
-// This is just making `target` for now.
-int build_target_structure() {
+// To simply build `target`: 	`build_target_structure(".")`
+// To build `target/a/b`: 		`build_target_structure("a/b")`
+int build_target_structure(const char *f) {
   // Check if `target` already exists, and if it does
   // there is no need to remake it.
-  log("Checking `target` structure.");
+  log("Checking `target/%s` structure.", f);
+  char fp[1000];
+  int rc = snprintf(fp, 1000, "target/%s", f);
+  if (rc > 1000 || rc < 0) {
+    log_err("Failed to construct filepath for `%s`", fp);
+    return -1;
+  }
+  printf("FP: %s\n", fp);
   struct stat sb;
-  if (stat("target", &sb) == 0 && S_ISDIR(sb.st_mode)) {
-    log("`target` already exists... Continuing.");
+  if (stat(fp, &sb) == 0 && S_ISDIR(sb.st_mode)) {
+    log("`%s` already exists... Continuing.", fp);
     return 0;
   } else {
-    // Build `target`.
-    log_war("`target` doesn't exist... Building.");
-    int rc = system("mkdir target");
+    // Build `target/f`.
+    log_war("`%s` doesn't exist... Building.", fp);
+    char cmd[1000];
+    int rc = snprintf(cmd, 1000, "mkdir -p %s", fp);
+    if (rc > 1000 || rc < 0) {
+      log_err("Failed to construct `mkdir` cmd for `%s`", fp);
+      return -1;
+    }
+    rc = system(cmd);
     if (rc < 0) {
-      log_err("Failed to build `target`. Aborting.");
+      log_err("Failed to build `%s`. Aborting.", fp);
       return -1;
     }
     return 0;
@@ -65,11 +79,12 @@ int build_target_structure() {
 //
 // Examples:
 // `src/index.md`	 		-> `index`
-// `src/notes/notes.md` 	-> `notes/notes`
+// `src/notes/notes.md` 	-> `notes/` `notes`
+// `src/notes/os/vmem.md` 	-> `notes/os/` `vmem`
 // ...
 //
 // NOTE: This populates the `cut_fp` buffer with the desired file path.
-int cut_md_file_path(const char *md_fp, char *cut_fp) {
+int cut_md_file_path(const char *md_fp, char *cut_p, char *cut_f) {
   // Find start index.
   //
   // This is the first character in the string following `src/`.
@@ -94,9 +109,28 @@ int cut_md_file_path(const char *md_fp, char *cut_fp) {
     assert(md_fp[i - 3 + t] == md[t]);
   }
 
+  // Find the beginning of the file name.
+  //
+  // This is everything from `end` to the previous `/`.
+  // e.g., `vmem` in the last example of the doc comment.
+  while (md_fp[--i] != '/')
+    ;
+  const char *f = &md_fp[i + 1];
+
   // Now `memcpy`.
-  size_t len = end - start;
-  memcpy(cut_fp, start, len);
+  //
+  // First we do the file name itself.
+  size_t f_len = end - f;
+  memcpy(cut_f, f, f_len);
+  cut_f[f_len] = 0;
+  // Now we do the parent directory.
+  if (f == start) {
+    cut_p[0] = 0;
+  } else {
+    size_t p_len = f - 1 - start;
+    memcpy(cut_p, start, p_len);
+    cut_p[p_len] = 0;
+  }
   return 0;
 }
 
@@ -110,28 +144,41 @@ int cut_md_file_path(const char *md_fp, char *cut_fp) {
 //
 // NOTE: This currently just uses the `main.tmpl` file for templating.
 // This should be customized in the future if multiple templates arise.
+//
+// TODO: It might be kinda cool to only build an `html` file again if
+// the `.md` was edited after the `.html` was. Kinda like `make`.
 int file_md_to_html(const char *md_fp) {
   int rc;
-
-  // TODO:
-  // Double-check that `fp` file exists.
 
   // Format build command.
   //
   // First we must cut out the extraneous parts of the `.md` file path.
   // Then, we can build the file path to the `.html` target.
-  char cut_md_fp[100];
-  rc = cut_md_file_path(md_fp, cut_md_fp);
+  char cut_md_p[100];
+  char cut_md_f[100];
+  rc = cut_md_file_path(md_fp, cut_md_p, cut_md_f);
   if (rc < 0) {
     log_err("Attempt to cut file path `%s` failed. Skipping.", md_fp);
     return -1;
   }
+  log("Split `md_fp` into folder `%s` and basename `%s`", cut_md_p, cut_md_f);
   char html_fp[100];
-  rc = snprintf(html_fp, 100, "target/%s.html", cut_md_fp);
+  rc = snprintf(html_fp, 100, "target/%s/%s.html", cut_md_p, cut_md_f);
   if (rc > 100 || rc < 0) {
     log_err("Attempt to form file path to `.html` for `%s` failed.", md_fp);
     return -1;
   }
+
+  // Before we actually compile, we should create the `target/cut_md_p`
+  // directory if it does not already exist.
+  rc = build_target_structure(cut_md_p);
+  if (rc < 0) {
+    log_err("Attempt to build target structure for directory `%s` failed.",
+            cut_md_p);
+    return -1;
+  }
+
+  // Now we can safely build.
   char cmd[200];
   rc = snprintf(cmd, 200,
                 PANDOC PANDOC_FORMAT_FLAGS "%s -o %s" PANDOC_MAIN_TMPL_FLAG,
@@ -218,7 +265,7 @@ int build_website_html(const char *fp) {
   })
 
 int main(void) {
-  try(build_target_structure());
+  try(build_target_structure("."));
   try(build_website_html("src"));
   return 0;
 }
