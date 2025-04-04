@@ -29,6 +29,9 @@ jobs:
         with:
           path: target
 
+      - name: List target dir
+        run: ls -R target
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
