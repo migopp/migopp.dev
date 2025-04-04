@@ -134,8 +134,9 @@ int cut_md_file_path(const char *md_fp, char *cut_p, char *cut_f) {
 }
 
 #define PANDOC " pandoc "
-#define PANDOC_FORMAT_FLAGS " -f markdown -t html "
+#define PANDOC_FORMAT_FLAGS " -f markdown -t html5 -s "
 #define PANDOC_MAIN_TMPL_FLAG " --template=tmpl/main.tmpl "
+#define PANDOC_CODE_HILI_FLAG " --no-highlight "
 
 // Compiles a single `md` file to `html`.
 //
@@ -180,7 +181,8 @@ int file_md_to_html(const char *md_fp) {
   // Now we can safely build.
   char cmd[200];
   rc = snprintf(cmd, 200,
-                PANDOC PANDOC_FORMAT_FLAGS "%s -o %s" PANDOC_MAIN_TMPL_FLAG,
+                PANDOC PANDOC_FORMAT_FLAGS
+                "%s -o %s" PANDOC_MAIN_TMPL_FLAG PANDOC_CODE_HILI_FLAG,
                 md_fp, html_fp);
   if (rc > 200 || rc < 0) {
     log_err("Attempt to form `pandoc` command for `%s` failed.", md_fp);

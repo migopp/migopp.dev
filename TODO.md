@@ -2,11 +2,11 @@
 
 - [ ] Rewrite core text/pages
 
-  - [ ] Home
+  - [x] Home
   - [ ] Blog (?)
   - [ ] Resume
 
-- [ ] Favicon
+- [x] Favicon
 
 - [ ] Figure out how to deploy
 

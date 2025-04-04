@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 1.1rem;
+}
+
+body {
+  display: flex;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+header h1 a {
+  text-decoration: none;
+  color: black;
+}
+
+header h1 {
+  margin: 1rem 0 0 0;
+}
+
+header {
+  margin: 0;
+}
+
+header ul,
+footer ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+header li,
+footer li {
+  padding-right: 1rem;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+footer {
+  margin: 0 0 1rem 0;
+}
+
+#mail {
+  font-size: 0.8rem;
+  font-family: monospace;
+}
