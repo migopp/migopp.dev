@@ -5,10 +5,9 @@ date: April 4, 2025
 
 ## Language functionality
 
-I don't believe there are actually that many times in which I think: "I wish this language had _more_ features!" (besides the oh-so-obvious compiler-being-smarter "feature").
-This is mainly because all higher-level languages that I have used (I'm including C in this) have sufficient functionality.
-That is, I can make anything I want _work_ with the first idea that pops in my head (almost... like, I can't solve post-correspondence or the halting problem).
-Oftentimes, I can express the best way that I know how to solve a problem, even when working with C.
+I don't believe there that many times I've thought: "I wish this language had _more_ features!".
+This is mainly because all higher-level languages I'm familiar with (I'm including C in this) have sufficient functionality for development.
+Meaning, I can (mostly) express and solve any problem in the _best way_ I know how regardless of the language.
 
 That is, of course, not always true.
 
@@ -31,7 +30,6 @@ void timer_interrupt_handler(void *ctx) {
 
     // Switch directly to another task, if we are available to do so.
     if (my_task.can_context_switch()) yield();
-    return;
 }
 ```
 
@@ -72,7 +70,6 @@ void timer_interrupt_handler(void *ctx) {
             my_task,
             second_level_timer_interrupt_handler
         );
-    return;
 }
 ```
 
@@ -99,7 +96,7 @@ We could capture everything we could want to know when we run cleanup at the tim
 ## The hack
 
 I called this a hack, but that's clickbait.
-It is true that closures should be a feature implemented by the compiler, but it's aslo possible to implement it in C itself.
+It is true that closures should be a feature implemented by the compiler, but it's also possible to implement it in C itself.
 How?
 
 Well, let's start by considering what a closure is, exactly.
