@@ -6,6 +6,8 @@
   - [ ] Blog (?)
   - [ ] Resume
 
+- [ ] README
+
 - [x] Favicon
 
 - [x] Figure out how to deploy

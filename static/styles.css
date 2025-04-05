@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 750px;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
@@ -55,6 +55,13 @@ h2,
 h3,
 p {
   margin: 0.5rem 0 0.5rem 0;
+}
+
+code {
+  background: #edeade;
+  font-size: 0.75rem;
+  border-radius: 5px;
+  padding: 0.1rem;
 }
 
 footer {

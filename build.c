@@ -133,21 +133,20 @@ int cut_md_file_path(const char *md_fp, char *cut_p, char *cut_f) {
   return 0;
 }
 
+typedef enum pandoc_tmpl { MAIN, THOUGHTS } pandoc_tmpl;
+
 #define PANDOC " pandoc "
 #define PANDOC_FORMAT_FLAGS " -f markdown -t html5 -s "
-#define PANDOC_MAIN_TMPL_FLAG " --template=tmpl/main.tmpl "
+#define PANDOC_TMPL_FLAG " --template=tmpl/%s.tmpl "
 #define PANDOC_CODE_HILI_FLAG " --no-highlight "
 
 // Compiles a single `md` file to `html`.
 //
 // `./src/.../example.md` -> `./target/.../example.html`
 //
-// NOTE: This currently just uses the `main.tmpl` file for templating.
-// This should be customized in the future if multiple templates arise.
-//
 // TODO: It might be kinda cool to only build an `html` file again if
 // the `.md` was edited after the `.html` was. Kinda like `make`.
-int file_md_to_html(const char *md_fp) {
+int file_md_to_html(const char *md_fp, pandoc_tmpl tmpl) {
   int rc;
 
   // Format build command.
@@ -178,12 +177,15 @@ int file_md_to_html(const char *md_fp) {
     return -1;
   }
 
+  // Pick template.
+  const char *tmpl_to_use = tmpl == MAIN ? "main" : "thoughts";
+
   // Now we can safely build.
   char cmd[200];
   rc = snprintf(cmd, 200,
                 PANDOC PANDOC_FORMAT_FLAGS
-                "%s -o %s" PANDOC_MAIN_TMPL_FLAG PANDOC_CODE_HILI_FLAG,
-                md_fp, html_fp);
+                "%s -o %s" PANDOC_TMPL_FLAG PANDOC_CODE_HILI_FLAG,
+                md_fp, html_fp, tmpl_to_use);
   if (rc > 200 || rc < 0) {
     log_err("Attempt to form `pandoc` command for `%s` failed.", md_fp);
     return -1;
@@ -202,7 +204,7 @@ int file_md_to_html(const char *md_fp) {
 //
 // Or, more generally, `dir`. Since this is most intuitively
 // written as a recursive function.
-int build_website_html(const char *fp) {
+int build_website_html(const char *fp, pandoc_tmpl tmpl) {
   log("`build_website_html` called on `%s`", fp);
   DIR *dir;
   struct dirent *ent;
@@ -223,7 +225,7 @@ int build_website_html(const char *fp) {
 
         // Now we can build the file.
         log("Building `.html` file from `%s`", ent_fp);
-        rc = file_md_to_html(ent_fp);
+        rc = file_md_to_html(ent_fp, tmpl);
         if (rc < 0) {
           return -1;
         }
@@ -249,7 +251,11 @@ int build_website_html(const char *fp) {
         //
         // Not really sure what there is to handle, though.
         // If we to make something, we can just say so and move on.
-        build_website_html(ent_fp);
+        pandoc_tmpl ent_tmpl =
+            tmpl == THOUGHTS || (strcmp(ent->d_name, "thoughts") == 0)
+                ? THOUGHTS
+                : MAIN;
+        build_website_html(ent_fp, ent_tmpl);
       } else {
         log_war("Found unknown entry (%d)", ent->d_type);
       }
@@ -267,6 +273,6 @@ int build_website_html(const char *fp) {
 
 int main(void) {
   try(build_target_structure("."));
-  try(build_website_html("src"));
+  try(build_website_html("src", MAIN));
   return 0;
 }
