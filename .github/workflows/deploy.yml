@@ -45,8 +45,6 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - name: List target dir
-        run: ls -R .
       - name: Deploy to Pages
         id: deployment
         uses: actions/deploy-pages@v4
