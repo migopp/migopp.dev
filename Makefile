@@ -1,3 +1,5 @@
+.PHONY: all build clean
+
 all: build
 
 build:
@@ -9,5 +11,3 @@ html: build
 clean:
 	rm -rf build
 	rm -rf target
-
-.PHONY: all build clean
