@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
 
 * {
   margin: 0;
@@ -6,8 +6,6 @@
 }
 
 html {
-  font-family: "Neuton", serif;
-  font-weight: 500;
   font-size: 1.2rem;
 }
 
@@ -70,6 +68,12 @@ code {
 
 footer {
   margin: 0 0 1rem 0;
+}
+
+.jpn {
+  font-family: "Kiwi Maru", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #mail {
